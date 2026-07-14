@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Customer Dashboard — Stackly Construction</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700;800;900&family=Orbitron:wght@700;900&display=swap"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+  <link rel="stylesheet" href="css/style.css"/>
+  <style>
+    :root {
+      --dash-bg: #0b0b0b;
+      --card-bg: #121212;
+      --card-border: #1f1f1f;
+    }
+    body {
+      background: var(--dash-bg);
+      color: var(--white);
+      font-family: 'Inter', sans-serif;
+    }
+    .dash-container {
+      max-width: 1400px;
+      margin: 120px auto 60px;
+      padding: 0 40px;
+    }
+    .dash-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 40px;
+      border-bottom: 1px solid var(--card-border);
+      padding-bottom: 24px;
+    }
+    .client-profile {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .client-avatar {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid var(--gold);
+    }
+    .client-info h1 {
+      font-size: 24px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+    }
+    .client-info p {
+      font-size: 13px;
+      color: var(--grey-1);
+    }
+    .btn-logout {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--grey-2);
+      padding: 10px 22px;
+      border: 1px solid var(--border);
+      border-radius: 2px;
+      transition: all .3s;
+    }
+    .btn-logout:hover {
+      color: var(--white);
+      border-color: var(--gold);
+      background: rgba(201, 169, 110, 0.05);
+    }
+    .dash-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 32px;
+    }
+    @media (max-width: 1024px) {
+      .dash-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    .dash-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 4px;
+      padding: 30px;
+      position: relative;
+    }
+    .card-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 22px;
+      letter-spacing: 2.5px;
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--gold);
+    }
+    .project-hero {
+      position: relative;
+      border-radius: 4px;
+      overflow: hidden;
+      margin-bottom: 24px;
+      height: 280px;
+    }
+    .project-hero img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: brightness(0.7);
+    }
+    .project-details {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+    .prog-circle {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .prog-num {
+      font-size: 48px;
+      font-weight: 800;
+      color: var(--white);
+      line-height: 1;
+      font-family: 'Orbitron', sans-serif;
+    }
+    .prog-label {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--grey-1);
+    }
+    .timeline-list {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+    .timeline-item {
+      display: flex;
+      gap: 20px;
+      position: relative;
+    }
+    .timeline-item::after {
+      content: '';
+      position: absolute;
+      left: 10px;
+      top: 24px;
+      bottom: -22px;
+      width: 1px;
+      background: var(--card-border);
+    }
+    .timeline-item:last-child::after {
+      display: none;
+    }
+    .timeline-dot {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: var(--black-3);
+      border: 2px solid var(--card-border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 9px;
+      z-index: 2;
+    }
+    .timeline-dot.done {
+      border-color: #2ecc71;
+      color: #2ecc71;
+      background: rgba(46, 204, 113, 0.1);
+    }
+    .timeline-dot.current {
+      border-color: var(--gold);
+      color: var(--gold);
+      background: rgba(201, 169, 110, 0.1);
+      animation: pulse-gold 2s infinite;
+    }
+    @keyframes pulse-gold {
+      0% { box-shadow: 0 0 0 0 rgba(201, 169, 110, 0.4); }
+      70% { box-shadow: 0 0 0 8px rgba(201, 169, 110, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(201, 169, 110, 0); }
+    }
+    .timeline-content h4 {
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 2px;
+    }
+    .timeline-content p {
+      font-size: 12px;
+      color: var(--grey-1);
+    }
+    .timeline-content span {
+      font-size: 11px;
+      color: var(--gold);
+      margin-top: 4px;
+      display: inline-block;
+    }
+    .financials-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+    .fin-box {
+      border: 1px solid var(--card-border);
+      border-radius: 4px;
+      padding: 20px;
+      background: var(--black-3);
+    }
+    .fin-val {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 20px;
+      font-weight: 700;
+      margin-top: 8px;
+    }
+    .fin-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--grey-1);
+    }
+    .docs-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .doc-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 18px;
+      border: 1px solid var(--card-border);
+      background: var(--black-3);
+      border-radius: 2px;
+      transition: border-color .3s;
+    }
+    .doc-item:hover {
+      border-color: var(--gold);
+    }
+    .doc-info {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .doc-info i {
+      color: var(--gold);
+      font-size: 18px;
+    }
+    .doc-name {
+      font-size: 13px;
+      font-weight: 500;
+    }
+    .doc-meta {
+      font-size: 11px;
+      color: var(--grey-1);
+    }
+    .doc-dl {
+      font-size: 13px;
+      color: var(--grey-2);
+      transition: color .3s;
+    }
+    .doc-dl:hover {
+      color: var(--white);
+    }
+    @media (max-width: 900px) {
+      .nav-end {
+        display: none !important;
+      }
+    }
+    @media (max-width: 768px) {
+      .dash-container {
+        margin: 100px auto 40px;
+        padding: 0 20px;
+      }
+      .dash-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+      }
+      .dash-header > div:last-child {
+        text-align: left !important;
+      }
+    }
+    @media (max-width: 480px) {
+      .financials-grid {
+        grid-template-columns: 1fr;
+      }
+      .dash-card {
+        padding: 20px;
+      }
+      .prog-circle {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<nav class="mob-nav">
+  <a href="#overview">Overview</a>
+  <a href="#timeline">Timeline</a>
+  <a href="#financials">Financials</a>
+  <a href="#documents">Documents</a>
+  <a href="index.html">Main Site</a>
+  <a href="login.html">Logout</a>
+</nav>
+
+<!-- HEADER -->
+<header id="nav" class="solid">
+  <a href="index.html" class="nav-logo"><img src="images/logo.png" alt="Stackly Logo" style="height: 48px; width: auto; display: block; filter: drop-shadow(0 1px 4px rgba(0,0,0,0.5));" /></a>
+  <ul class="nav-links">
+    <li><a href="#overview">Overview</a></li>
+    <li><a href="#timeline">Timeline</a></li>
+    <li><a href="#financials">Financials</a></li>
+    <li><a href="#documents">Documents</a></li>
+    <li><a href="index.html">Main Site</a></li>
+  </ul>
+  <div class="nav-end" style="margin-left: auto; display: flex; align-items: center; gap: 24px;">
+    <span style="font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--gold);">Client Access</span>
+    <a href="login.html" class="btn-logout">Logout</a>
+  </div>
+  <div class="ham">
+    <span></span><span></span><span></span>
+  </div>
+</header>
+
+<div class="dash-container">
+  
+  <!-- DASHBOARD HEADER -->
+  <div class="dash-header">
+    <div class="client-profile">
+      <img src="images/dash-customer-avatar.webp" alt="Client Representative" class="client-avatar" />
+      <div class="client-info">
+        <h1 id="welcomeName">Welcome Back, Priya</h1>
+        <p id="welcomeMeta">Client Representative — Zenith Tower Project</p>
+      </div>
+    </div>
+    <div style="text-align: right;">
+      <div style="font-size: 12px; color: var(--grey-1); text-transform: uppercase; letter-spacing: 1.5px;">Current Site Phase</div>
+      <div style="font-size: 15px; font-weight: 700; margin-top: 4px; color: var(--gold);">Facade Installation &amp; MEP Rough-ins</div>
+    </div>
+  </div>
+
+  <!-- DASHBOARD GRID -->
+  <div class="dash-grid">
+    
+    <!-- LEFT COLUMN -->
+    <div style="display: flex; flex-direction: column; gap: 32px;">
+      
+      <!-- PROJECT TRACKER -->
+      <div class="dash-card" id="overview">
+        <div class="card-title">
+          <i class="fa-solid fa-building-shield"></i> Project Status Overview
+        </div>
+        <div class="project-hero">
+          <img src="images/dash-customer-project.webp" alt="Zenith Tower Site Build" />
+        </div>
+        <div class="project-details">
+          <div>
+            <h3 id="projectTitle" style="font-size: 18px; font-weight: 700; margin-bottom: 6px;">Zenith Tower Redesign</h3>
+            <p style="font-size: 13px; color: var(--grey-1); max-width: 450px;">A 52-storey mixed-use tower focusing on net-zero efficiency, localized carbon capturing, and structural steel load reduction.</p>
+          </div>
+          <div class="prog-circle">
+            <div class="prog-num">74%</div>
+            <div>
+              <div class="prog-label">Completion</div>
+              <div style="width: 120px; height: 4px; background: var(--black-4); border-radius: 2px; margin-top: 6px; overflow: hidden;">
+                <div style="width: 74%; height: 100%; background: var(--gold);"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TIMELINE & SCHEDULE -->
+      <div class="dash-card" id="timeline">
+        <div class="card-title">
+          <i class="fa-regular fa-calendar-check"></i> Construction Timeline
+        </div>
+        <div class="timeline-list">
+          <div class="timeline-item">
+            <div class="timeline-dot done"><i class="fa-solid fa-check"></i></div>
+            <div class="timeline-content">
+              <h4>Phase 1: Excavation &amp; Piling</h4>
+              <p>Completed structural groundwork and concrete retaining slurry walls.</p>
+              <span>Completed Nov 2025</span>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-dot done"><i class="fa-solid fa-check"></i></div>
+            <div class="timeline-content">
+              <h4>Phase 2: Core Concrete Pouring</h4>
+              <p>Reached Level 52 floor structural slab setting. Preserved core column anchors.</p>
+              <span>Completed March 2026</span>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-dot current"><i class="fa-solid fa-circle-notch fa-spin"></i></div>
+            <div class="timeline-content">
+              <h4>Phase 3: MEP Rough-Ins &amp; Glass Facade</h4>
+              <p>Curtain wall glazing installation is active. Mechanical ventilation piping is in progress on levels 20-35.</p>
+              <span>Target Completion: August 2026</span>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+              <h4>Phase 4: Interior Commissioning &amp; Fit-Out</h4>
+              <p>Acoustic ceiling drops, flooring laying, and intelligent BMS control systems initialization.</p>
+              <span>Scheduled: Sept - Dec 2026</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- RIGHT COLUMN -->
+    <div style="display: flex; flex-direction: column; gap: 32px;">
+      
+      <!-- FINANCIAL METRICS -->
+      <div class="dash-card" id="financials">
+        <div class="card-title">
+          <i class="fa-solid fa-coins"></i> Financial Tracker
+        </div>
+        <div class="financials-grid">
+          <div class="fin-box">
+            <div class="fin-label">Total Contract</div>
+            <div class="fin-val">$148.5M</div>
+          </div>
+          <div class="fin-box">
+            <div class="fin-label">Paid Invoices</div>
+            <div class="fin-val">$109.8M</div>
+          </div>
+          <div class="fin-box" style="grid-column: span 2;">
+            <div class="fin-label">Pending Invoices</div>
+            <div class="fin-val" style="color: var(--gold);">$12.4M <span style="font-size: 11px; font-weight: normal; color: var(--grey-1); font-family: 'Inter', sans-serif;">(Due in 15 days)</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- DOCUMENTS PORTAL -->
+      <div class="dash-card" id="documents">
+        <div class="card-title">
+          <i class="fa-regular fa-folder-open"></i> Documents Portal
+        </div>
+        <div class="docs-list">
+          <div class="doc-item">
+            <div class="doc-info">
+              <i class="fa-regular fa-file-pdf"></i>
+              <div>
+                <div class="doc-name">Zenith_Floorplan_V4.pdf</div>
+                <div class="doc-meta">Blueprint · 24.8 MB</div>
+              </div>
+            </div>
+            <a href="404.html" class="doc-dl"><i class="fa-solid fa-download"></i></a>
+          </div>
+          <div class="doc-item">
+            <div class="doc-info">
+              <i class="fa-regular fa-file-pdf"></i>
+              <div>
+                <div class="doc-name">Material_Quality_Report.pdf</div>
+                <div class="doc-meta">Quality Assurance · 4.2 MB</div>
+              </div>
+            </div>
+            <a href="404.html" class="doc-dl"><i class="fa-solid fa-download"></i></a>
+          </div>
+          <div class="doc-item">
+            <div class="doc-info">
+              <i class="fa-regular fa-file-word"></i>
+              <div>
+                <div class="doc-name">Execution_Agreement_2025.docx</div>
+                <div class="doc-meta">Contract · 1.8 MB</div>
+              </div>
+            </div>
+            <a href="404.html" class="doc-dl"><i class="fa-solid fa-download"></i></a>
+          </div>
+          <div class="doc-item">
+            <div class="doc-info">
+              <i class="fa-regular fa-file-excel"></i>
+              <div>
+                <div class="doc-name">Financial_Draw_Schedule.xlsx</div>
+                <div class="doc-meta">Budget · 840 KB</div>
+              </div>
+            </div>
+            <a href="404.html" class="doc-dl"><i class="fa-solid fa-download"></i></a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script src="js/main.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  setTimeout(() => {
+    const tabs = document.querySelectorAll('.nav-links a, .mob-nav a');
+    const sections = {
+      'overview': [document.getElementById('overview')],
+      'timeline': [document.getElementById('timeline')],
+      'financials': [document.getElementById('financials')],
+      'documents': [document.getElementById('documents')]
+    };
+
+    function showTab(tabId) {
+      if (!sections[tabId]) return;
+      
+      Object.values(sections).forEach(group => {
+        group.forEach(el => {
+          if (el) el.style.display = 'none';
+        });
+      });
+      
+      sections[tabId].forEach(el => {
+        if (el) {
+          el.style.display = 'block';
+          gsap.fromTo(el, { opacity: 0, y: 15 }, { opacity: 1, y: 0, duration: 0.4, ease: 'power2.out' });
+        }
+      });
+
+      const grid = document.querySelector('.dash-grid');
+      if (grid) {
+        grid.style.gridTemplateColumns = '1fr';
+      }
+
+      tabs.forEach(a => {
+        const href = a.getAttribute('href');
+        if (href === '#' + tabId) {
+          a.classList.add('on');
+        } else if (href && href.startsWith('#')) {
+          a.classList.remove('on');
+        }
+      });
+    }
+
+    tabs.forEach(tab => {
+      const href = tab.getAttribute('href');
+      if (href && href.startsWith('#')) {
+        const tabId = href.substring(1);
+        tab.addEventListener('click', (e) => {
+          e.preventDefault();
+          showTab(tabId);
+          window.location.hash = tabId;
+        });
+      }
+    });
+
+    // Parse user details from localStorage
+    const sessionUser = localStorage.getItem('stackly_user');
+    if (sessionUser) {
+      const user = JSON.parse(sessionUser);
+      const welcomeName = document.getElementById('welcomeName');
+      const welcomeMeta = document.getElementById('welcomeMeta');
+      const projectTitle = document.getElementById('projectTitle');
+      
+      if (welcomeName) welcomeName.textContent = `Welcome Back, ${user.name}`;
+      if (welcomeMeta) welcomeMeta.textContent = `${user.position} — ${user.project}`;
+      if (projectTitle) projectTitle.textContent = user.project;
+    }
+
+    const initialHash = window.location.hash.substring(1);
+    if (initialHash && sections[initialHash]) {
+      showTab(initialHash);
+    } else {
+      showTab('overview');
+    }
+  }, 100);
+});
+</script>
+</body>
+</html>
+

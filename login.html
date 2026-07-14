@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Login — Stackly Construction Portal</title>
+  <meta name="description" content="Sign in to the Stackly Construction client portal to access project dashboards, documents, and progress reports."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700;800;900&display=swap"/>
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+  <link rel="stylesheet" href="css/style.css"/>
+</head>
+<body style="background:var(--black-3);">
+
+<!-- MOBILE NAV -->
+<nav class="mob-nav">
+  <a href="index.html">Home</a><a href="about.html">About</a><a href="services.html">Services</a>
+  <a href="blog.html">Blog</a><a href="contact.html">Contact</a><a href="login.html" class="on">Login</a>
+</nav>
+
+<!-- NAVBAR -->
+<header id="nav" class="solid">
+  <a href="index.html" class="nav-logo"><img src="images/logo.png" alt="Stackly Logo" style="height: 48px; width: auto; display: block; filter: drop-shadow(0 1px 4px rgba(0,0,0,0.5));" /></a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li><li><a href="about.html">About</a></li>
+    <li><a href="services.html">Services</a></li><li><a href="blog.html">Blog</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <div class="nav-end"><a href="login.html" class="btn-login">Login</a></div>
+  <div class="ham"><span></span><span></span><span></span></div>
+</header>
+
+<div class="login-wrap" style="margin-top:var(--nav-h);">
+
+  <!-- VISUAL SIDE -->
+  <div class="lv">
+    <div class="lv-bg"></div>
+    <div class="lv-ov"></div>
+    <div class="lv-body">
+      <a href="index.html" class="nav-logo"><img src="images/logo.png" alt="Stackly Logo" style="height: 48px; width: auto; display: block; filter: drop-shadow(0 1px 4px rgba(0,0,0,0.5));" /></a>
+      <div class="lv-bot">
+        <h2 class="sec-h2">Building<br>The World's<br>Tomorrow</h2>
+        <p>Access your project dashboard, track construction milestones, review documents, and collaborate with our global team.</p>
+        <div class="lv-stats">
+          <div><div class="lv-stat-n">250+</div><div class="lv-stat-l">Projects</div></div>
+          <div><div class="lv-stat-n">40+</div><div class="lv-stat-l">Countries</div></div>
+          <div><div class="lv-stat-n">28yr</div><div class="lv-stat-l">Experience</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FORM SIDE -->
+  <div class="lf-side">
+    <div class="lf-head">
+      <div class="nav-logo" style="display:block;margin-bottom:28px;"><img src="images/logo.png" alt="Stackly Logo" style="height: 56px; width: auto; display: block;" /></div>
+      <h2>Welcome<br>Back</h2>
+      <p>Sign in to your Stackly client portal</p>
+    </div>
+
+    <form class="lf-form" id="loginForm">
+
+      <!-- Social -->
+      <div class="soc-logins">
+        <button type="button" class="soc-lb">
+          <i class="fa-brands fa-google" style="margin-right:8px;font-size:14px;"></i> Google
+        </button>
+        <button type="button" class="soc-lb">
+          <i class="fa-brands fa-linkedin-in" style="margin-right:8px;font-size:14px;"></i> LinkedIn
+        </button>
+      </div>
+
+      <div class="divider-or">or sign in with email</div>
+
+      <!-- Role -->
+      <div class="fg">
+        <label class="flbl">Select Portal Role</label>
+        <select class="fselect" id="loginRole" required>
+          <option value="customer" selected>Customer / Client Portal</option>
+          <option value="engineer">Engineer / Project Management</option>
+        </select>
+      </div>
+
+      <!-- Registration-only fields -->
+      <div class="fg reg-only" style="display:none;">
+        <label class="flbl">Full Name</label>
+        <input class="finput" type="text" placeholder="Priya Sharma" id="regName"/>
+      </div>
+
+      <!-- Email -->
+      <div class="fg">
+        <label class="flbl">Email Address</label>
+        <input class="finput" type="email" placeholder="you@company.com" required id="loginEmail"/>
+      </div>
+
+      <!-- Password -->
+      <div class="fg">
+        <label class="flbl">Password</label>
+        <div class="pw-wrap">
+          <input class="finput" type="password" placeholder="Enter your password" required id="loginPassword"/>
+          <button type="button" class="pw-eye"><i class="fa-regular fa-eye"></i></button>
+        </div>
+      </div>
+
+      <!-- Remember / Forgot -->
+      <div class="cb-row">
+        <label class="cb-lbl"><input type="checkbox" checked/> Remember me for 30 days</label>
+        <a href="#" class="forgot-a">Forgot Password?</a>
+      </div>
+
+      <!-- Submit -->
+      <button type="submit" class="login-sub" style="display: block !important; opacity: 1 !important; visibility: visible !important; background: var(--gold) !important; color: var(--black) !important;">Login</button>
+
+      <div class="reg-txt" id="toggleRegText">Don't have an account? <a href="#" id="btnShowRegister">Create an Account</a></div>
+    </form>
+
+    <a href="index.html" class="back-site">← Back to Stackly.com</a>
+  </div>
+
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script src="js/main.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const loginForm = document.getElementById('loginForm');
+  const btnShowRegister = document.getElementById('btnShowRegister');
+  const toggleRegText = document.getElementById('toggleRegText');
+  const formHeadTitle = document.querySelector('.lf-head h2');
+  const formHeadDesc = document.querySelector('.lf-head p');
+  const socLogins = document.querySelector('.soc-logins');
+  const dividerOr = document.querySelector('.divider-or');
+  const rememberRow = document.querySelector('.cb-row');
+  const submitBtn = document.querySelector('.login-sub');
+  
+  // Registration fields
+  const regOnlyFields = document.querySelectorAll('.reg-only');
+  const regNameInput = document.getElementById('regName');
+  const roleSelect = document.getElementById('loginRole');
+  const emailInput = document.getElementById('loginEmail');
+  const passwordInput = document.getElementById('loginPassword');
+
+  let isRegisterMode = false;
+
+  function toggleMode(e) {
+    if (e) e.preventDefault();
+    isRegisterMode = !isRegisterMode;
+
+    if (isRegisterMode) {
+      formHeadTitle.innerHTML = 'Create<br>Account';
+      formHeadDesc.textContent = 'Register your client or engineer portal profile';
+      if (socLogins) socLogins.style.display = 'none';
+      if (dividerOr) dividerOr.style.display = 'none';
+      if (rememberRow) rememberRow.style.display = 'none';
+      submitBtn.textContent = 'Create Account';
+      toggleRegText.innerHTML = 'Already have an account? <a href="#" id="btnShowRegister">Sign In</a>';
+      regOnlyFields.forEach(el => el.style.display = 'block');
+      
+      regNameInput.required = true;
+    } else {
+      formHeadTitle.innerHTML = 'Welcome<br>Back';
+      formHeadDesc.textContent = 'Sign in to your Stackly client portal';
+      if (socLogins) socLogins.style.display = 'grid';
+      if (dividerOr) dividerOr.style.display = 'flex';
+      if (rememberRow) rememberRow.style.display = 'flex';
+      submitBtn.textContent = 'Login';
+      toggleRegText.innerHTML = "Don't have an account? <a href='#' id='btnShowRegister'>Create an Account</a>";
+      regOnlyFields.forEach(el => el.style.display = 'none');
+      
+      regNameInput.required = false;
+    }
+
+    document.getElementById('btnShowRegister').addEventListener('click', toggleMode);
+  }
+
+  if (btnShowRegister) {
+    btnShowRegister.addEventListener('click', toggleMode);
+  }
+
+  roleSelect.addEventListener('change', () => {
+    if (roleSelect.value === 'engineer') {
+      regNameInput.placeholder = 'James Whitmore';
+    } else {
+      regNameInput.placeholder = 'Priya Sharma';
+    }
+  });
+
+  loginForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    e.stopPropagation(); 
+
+    const role = roleSelect.value;
+    const email = emailInput.value;
+    
+    let userData = {
+      role: role,
+      email: email,
+      name: isRegisterMode ? regNameInput.value : (role === 'engineer' ? 'James Whitmore' : 'Priya Sharma'),
+      position: role === 'engineer' ? 'Chief Project Engineer' : 'Client Representative',
+      project: role === 'engineer' ? 'Zenith Tower Project Control' : 'Zenith Tower Redesign'
+    };
+
+    if (!isRegisterMode) {
+      const stored = localStorage.getItem('stackly_registered_users');
+      if (stored) {
+        const users = JSON.parse(stored);
+        if (users[email] && users[email].role === role) {
+          userData = users[email];
+        }
+      }
+    } else {
+      const stored = localStorage.getItem('stackly_registered_users') || '{}';
+      const users = JSON.parse(stored);
+      users[email] = userData;
+      localStorage.setItem('stackly_registered_users', JSON.stringify(users));
+    }
+
+    localStorage.setItem('stackly_user', JSON.stringify(userData));
+
+    submitBtn.textContent = isRegisterMode ? 'Creating Account…' : 'Authenticating…';
+    submitBtn.disabled = true;
+    gsap.to(submitBtn, { scale: 0.96, duration: 0.1, yoyo: true, repeat: 1 });
+
+    setTimeout(() => {
+      submitBtn.innerHTML = isRegisterMode ? '<i class="fa-solid fa-check"></i> Account Created!' : '<i class="fa-solid fa-check"></i> Welcome Back!';
+      submitBtn.style.background = 'var(--gold)';
+      gsap.from(submitBtn, { scale: 0.9, duration: 0.5, ease: 'back.out(2)' });
+      setTimeout(() => {
+        if (role === 'engineer') {
+          window.location.href = 'dashboard-engineer.html';
+        } else {
+          window.location.href = 'dashboard-customer.html';
+        }
+      }, 1000);
+    }, 1600);
+  });
+});
+</script>
+</body>
+</html>
+
+
+
+
+
