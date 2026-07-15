@@ -20,7 +20,7 @@
 
 <!-- NAVBAR -->
 <header id="nav" class="solid">
-  <a href="index.html" class="nav-logo"><img src="images/logo.png" alt="Stackly Logo" style="height: 48px; width: auto; display: block; filter: drop-shadow(0 1px 4px rgba(0,0,0,0.5));" /></a>
+  <a href="index.html" class="nav-logo"><img src="images/logo.webp" alt="Stackly Logo" style="height: 48px; width: auto; display: block; filter: drop-shadow(0 1px 4px rgba(0,0,0,0.5));" /></a>
   <ul class="nav-links">
     <li><a href="index.html">Home</a></li><li><a href="about.html">About</a></li>
     <li><a href="services.html">Services</a></li><li><a href="blog.html">Blog</a></li>
@@ -37,7 +37,7 @@
     <div class="lv-bg"></div>
     <div class="lv-ov"></div>
     <div class="lv-body">
-      <a href="index.html" class="nav-logo"><img src="images/logo.png" alt="Stackly Logo" style="height: 48px; width: auto; display: block; filter: drop-shadow(0 1px 4px rgba(0,0,0,0.5));" /></a>
+      <a href="index.html" class="nav-logo"><img src="images/logo.webp" alt="Stackly Logo" style="height: 48px; width: auto; display: block; filter: drop-shadow(0 1px 4px rgba(0,0,0,0.5));" /></a>
       <div class="lv-bot">
         <h2 class="sec-h2">Building<br>The World's<br>Tomorrow</h2>
         <p>Access your project dashboard, track construction milestones, review documents, and collaborate with our global team.</p>
@@ -53,7 +53,6 @@
   <!-- FORM SIDE -->
   <div class="lf-side">
     <div class="lf-head">
-      <div class="nav-logo" style="display:block;margin-bottom:28px;"><img src="images/logo.png" alt="Stackly Logo" style="height: 56px; width: auto; display: block;" /></div>
       <h2>Welcome<br>Back</h2>
       <p>Sign in to your Stackly client portal</p>
     </div>
@@ -62,10 +61,10 @@
 
       <!-- Social -->
       <div class="soc-logins">
-        <button type="button" class="soc-lb">
+        <button type="button" class="soc-lb" onclick="window.location.href='404.html'">
           <i class="fa-brands fa-google" style="margin-right:8px;font-size:14px;"></i> Google
         </button>
-        <button type="button" class="soc-lb">
+        <button type="button" class="soc-lb" onclick="window.location.href='404.html'">
           <i class="fa-brands fa-linkedin-in" style="margin-right:8px;font-size:14px;"></i> LinkedIn
         </button>
       </div>
@@ -105,7 +104,7 @@
       <!-- Remember / Forgot -->
       <div class="cb-row">
         <label class="cb-lbl"><input type="checkbox" checked/> Remember me for 30 days</label>
-        <a href="#" class="forgot-a">Forgot Password?</a>
+        <a href="404.html" class="forgot-a">Forgot Password?</a>
       </div>
 
       <!-- Submit -->
@@ -184,6 +183,18 @@ document.addEventListener('DOMContentLoaded', () => {
       regNameInput.placeholder = 'James Whitmore';
     } else {
       regNameInput.placeholder = 'Priya Sharma';
+    }
+  });
+
+  // Reset form and enable submit button when restored from BFCache (back button clicked)
+  window.addEventListener('pageshow', (event) => {
+    submitBtn.disabled = false;
+    submitBtn.style.background = '';
+    submitBtn.style.color = '';
+    if (isRegisterMode) {
+      submitBtn.textContent = 'Create Account';
+    } else {
+      submitBtn.textContent = 'Login';
     }
   });
 

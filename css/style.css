@@ -28,6 +28,7 @@
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;font-size:16px;overflow-x:hidden}
 body{font-family:'Inter',sans-serif;background:var(--black);color:var(--white);overflow-x:hidden;line-height:1.65;-webkit-font-smoothing:antialiased}
+body.no-scroll{overflow:hidden !important;height:100vh !important}
 a{text-decoration:none;color:inherit}img{display:block;max-width:100%}ul{list-style:none}
 ::selection{background:var(--gold);color:var(--black)}
 ::-webkit-scrollbar{width:3px}::-webkit-scrollbar-track{background:var(--black)}::-webkit-scrollbar-thumb{background:var(--gold)}
@@ -372,7 +373,7 @@ img.ai-right{width:100%;height:540px;object-fit:cover}
 .ftarea{resize:none;height:130px}
 .fselect option{background:var(--black-3)}
 .sub-btn{display:inline-flex;align-items:center;gap:10px;padding:16px 44px;background:var(--gold);border:none;border-radius:2px;color:var(--black);font-size:11px;font-weight:800;letter-spacing:3px;text-transform:uppercase;cursor:pointer;transition:all .35s;font-family:'Inter',sans-serif}
-.sub-btn:hover{background:var(--white);transform:translateY(-2px)}
+.sub-btn:hover{background:var(--white)}
 
 .offices-sec{background:var(--black-3);padding:90px 0}
 .off-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;margin-top:56px;background:var(--border)}
@@ -423,7 +424,7 @@ img.ai-right{width:100%;height:540px;object-fit:cover}
 .cb-lbl input{accent-color:var(--gold)}
 .forgot-a{font-size:11px;color:var(--gold)}
 .login-sub{width:100%;padding:17px;background:var(--gold);border:none;color:var(--black);font-family:'Inter',sans-serif;font-size:12px;font-weight:800;letter-spacing:3px;text-transform:uppercase;border-radius:2px;cursor:pointer;transition:all .35s}
-.login-sub:hover{background:var(--white);transform:translateY(-2px)}
+.login-sub:hover{background:var(--white)}
 .reg-txt{text-align:center;font-size:12px;color:var(--grey-1);margin-top:4px}
 .reg-txt a{color:var(--gold);font-weight:700}
 .back-site{display:block;text-align:center;margin-top:40px;padding-top:28px;border-top:1px solid var(--border);font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--grey-1);transition:color .3s}

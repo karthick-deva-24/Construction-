@@ -18,12 +18,165 @@
       background: var(--dash-bg);
       color: var(--white);
       font-family: 'Inter', sans-serif;
+      overflow-x: hidden;
     }
-    .dash-container {
-      max-width: 1400px;
-      margin: 120px auto 60px;
-      padding: 0 40px;
+    
+    /* Layout styling */
+    .dash-wrapper {
+      display: flex;
+      min-height: 100vh;
+      background: var(--dash-bg);
     }
+    
+    /* Sidebar */
+    .dash-sidebar {
+      width: 280px;
+      background: var(--card-bg);
+      border-right: 1px solid var(--card-border);
+      padding: 40px 24px;
+      display: flex;
+      flex-direction: column;
+      position: fixed;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      z-index: 1010;
+      transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .sidebar-logo {
+      margin-bottom: 36px;
+      padding-left: 8px;
+    }
+    .client-profile {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 14px;
+      padding-bottom: 30px;
+      border-bottom: 1px solid var(--card-border);
+      margin-bottom: 30px;
+      padding-left: 8px;
+    }
+    .client-avatar {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid var(--gold);
+    }
+    .client-info h1 {
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      color: var(--white);
+      margin-bottom: 4px;
+    }
+    .client-info p {
+      font-size: 11px;
+      color: var(--grey-1);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      line-height: 1.4;
+    }
+    .sidebar-nav {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      flex-grow: 1;
+    }
+    .sidebar-nav .menu-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 16px;
+      color: var(--grey-2);
+      font-size: 11px;
+      font-weight: 750;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      border-radius: 4px;
+      transition: all 0.3s;
+      cursor: pointer;
+    }
+    .sidebar-nav .menu-item i {
+      font-size: 14px;
+      color: var(--grey-1);
+      transition: color 0.3s;
+      width: 20px;
+      text-align: center;
+    }
+    .sidebar-nav .menu-item:hover, .sidebar-nav .menu-item.on {
+      color: var(--white);
+      background: rgba(201, 169, 110, 0.05);
+    }
+    .sidebar-nav .menu-item:hover i, .sidebar-nav .menu-item.on i {
+      color: var(--gold);
+    }
+    .sidebar-divider {
+      height: 1px;
+      background: var(--card-border);
+      margin: 16px 0;
+    }
+    .btn-logout-sidebar {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--grey-2);
+      padding: 14px;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      transition: all .3s;
+      margin-top: auto;
+      background: rgba(255, 255, 255, 0.01);
+    }
+    .btn-logout-sidebar:hover {
+      color: var(--white);
+      border-color: var(--gold);
+      background: rgba(201, 169, 110, 0.05);
+    }
+    
+    /* Main Area */
+    .dash-main {
+      flex: 1;
+      margin-left: 280px;
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+    }
+    .dash-top-bar {
+      display: none;
+      height: 70px;
+      background: var(--card-bg);
+      border-bottom: 1px solid var(--card-border);
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 24px;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+    }
+    .sidebar-toggle {
+      background: none;
+      border: none;
+      color: var(--white);
+      font-size: 20px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .dash-content-inner {
+      padding: 56px 60px;
+    }
+    
+    /* Grid layout overrides */
     .dash-header {
       display: flex;
       justify-content: space-between;
@@ -32,49 +185,12 @@
       border-bottom: 1px solid var(--card-border);
       padding-bottom: 24px;
     }
-    .client-profile {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-    }
-    .client-avatar {
-      width: 56px;
-      height: 56px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 2px solid var(--gold);
-    }
-    .client-info h1 {
-      font-size: 24px;
-      font-weight: 700;
-      letter-spacing: -0.5px;
-    }
-    .client-info p {
-      font-size: 13px;
-      color: var(--grey-1);
-    }
-    .btn-logout {
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      color: var(--grey-2);
-      padding: 10px 22px;
-      border: 1px solid var(--border);
-      border-radius: 2px;
-      transition: all .3s;
-    }
-    .btn-logout:hover {
-      color: var(--white);
-      border-color: var(--gold);
-      background: rgba(201, 169, 110, 0.05);
-    }
     .dash-grid {
       display: grid;
       grid-template-columns: 1.8fr 1.2fr;
       gap: 32px;
     }
-    @media (max-width: 1024px) {
+    @media (max-width: 1200px) {
       .dash-grid {
         grid-template-columns: 1fr;
       }
@@ -101,19 +217,25 @@
       border-radius: 4px;
       overflow: hidden;
       margin-bottom: 24px;
-      height: 240px;
+      height: 280px;
     }
     .project-hero img {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      filter: brightness(0.65) sepia(0.2) hue-rotate(330deg);
+      filter: brightness(0.7);
+    }
+    .project-details {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      flex-wrap: wrap;
+      gap: 20px;
     }
     .telemetry-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 20px;
-      margin-bottom: 30px;
     }
     @media (max-width: 600px) {
       .telemetry-grid {
@@ -122,17 +244,17 @@
     }
     .tel-box {
       border: 1px solid var(--card-border);
-      background: var(--black-3);
-      padding: 20px;
       border-radius: 4px;
-      text-align: center;
+      padding: 24px;
+      background: var(--black-3);
+      position: relative;
     }
     .tel-val {
       font-family: 'Orbitron', sans-serif;
       font-size: 24px;
       font-weight: 700;
       color: var(--white);
-      margin-top: 8px;
+      margin-top: 10px;
     }
     .tel-val.ok {
       color: #2ecc71;
@@ -146,18 +268,21 @@
     .daily-logs {
       display: flex;
       flex-direction: column;
-      gap: 14px;
+      gap: 16px;
     }
     .log-item {
       display: flex;
       gap: 16px;
-      padding: 16px;
+      padding: 20px;
       border: 1px solid var(--card-border);
-      border-radius: 2px;
       background: var(--black-3);
+      border-radius: 4px;
     }
     .log-checkbox {
-      margin-top: 4px;
+      width: 18px;
+      height: 18px;
+      accent-color: var(--gold);
+      margin-top: 2px;
       cursor: pointer;
     }
     .log-details h4 {
@@ -168,30 +293,60 @@
     .log-details p {
       font-size: 12px;
       color: var(--grey-1);
-      line-height: 1.5;
+      line-height: 1.6;
     }
     .log-tag {
-      font-size: 10px;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      color: var(--gold);
-      margin-top: 6px;
       display: inline-block;
-      font-weight: 600;
+      font-size: 9px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--gold);
+      background: var(--gold-dim);
+      padding: 4px 10px;
+      border-radius: 2px;
+      margin-top: 10px;
+      font-weight: 700;
+    }
+    .docs-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .doc-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 18px;
+      border: 1px solid var(--card-border);
+      background: var(--black-3);
+      border-radius: 2px;
+    }
+    .doc-info {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .doc-name {
+      font-size: 13px;
+      font-weight: 500;
+    }
+    .doc-meta {
+      font-size: 11px;
+      color: var(--grey-1);
     }
     .rfi-list {
       display: flex;
       flex-direction: column;
-      gap: 12px;
+      gap: 14px;
     }
     .rfi-item {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 16px 20px;
+      padding: 18px;
       border: 1px solid var(--card-border);
       background: var(--black-3);
-      border-radius: 2px;
+      border-radius: 4px;
     }
     .rfi-title {
       font-size: 13px;
@@ -203,253 +358,257 @@
       color: var(--grey-1);
     }
     .rfi-status {
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 1px;
+      font-size: 10px;
       text-transform: uppercase;
+      letter-spacing: 1px;
+      font-weight: 700;
       padding: 4px 10px;
       border-radius: 2px;
     }
     .rfi-status.open {
-      color: var(--gold);
-      background: rgba(201, 169, 110, 0.1);
-      border: 1px solid rgba(201, 169, 110, 0.2);
+      background: rgba(231, 76, 60, 0.1);
+      color: #e74c3c;
     }
     .rfi-status.review {
-      color: #3498db;
-      background: rgba(52, 152, 219, 0.1);
-      border: 1px solid rgba(52, 152, 219, 0.2);
+      background: rgba(241, 196, 15, 0.1);
+      color: #f1c40f;
     }
-    @media (max-width: 900px) {
-      .nav-end {
-        display: none !important;
+    
+    /* Responsive layouts */
+    @media (max-width: 1024px) {
+      .dash-sidebar {
+        transform: translateX(-100%);
+      }
+      .dash-sidebar.open {
+        transform: translateX(0);
+      }
+      .dash-main {
+        margin-left: 0;
+      }
+      .dash-top-bar {
+        display: flex;
+      }
+      .dash-content-inner {
+        padding: 100px 24px 40px;
       }
     }
     @media (max-width: 768px) {
-      .dash-container {
-        margin: 100px auto 40px;
-        padding: 0 20px;
-      }
       .dash-header {
         flex-direction: column;
         align-items: flex-start;
         gap: 16px;
-      }
-      .dash-header > div:last-child {
-        text-align: left !important;
-      }
-    }
-    @media (max-width: 480px) {
-      .dash-card {
-        padding: 20px;
-      }
-      .log-item {
-        flex-direction: column;
-        gap: 10px;
       }
     }
   </style>
 </head>
 <body>
 
-<nav class="mob-nav">
-  <a href="#bim-twin">BIM Model</a>
-  <a href="#telemetry">Telemetry</a>
-  <a href="#operations">Operations</a>
-  <a href="#rfis">RFIs</a>
-  <a href="index.html">Main Site</a>
-  <a href="login.html">Logout</a>
-</nav>
-
-<!-- HEADER -->
-<header id="nav" class="solid">
-  <a href="index.html" class="nav-logo"><img src="images/logo.png" alt="Stackly Logo" style="height: 48px; width: auto; display: block; filter: drop-shadow(0 1px 4px rgba(0,0,0,0.5));" /></a>
-  <ul class="nav-links">
-    <li><a href="#bim-twin">BIM Model</a></li>
-    <li><a href="#telemetry">Telemetry</a></li>
-    <li><a href="#operations">Operations</a></li>
-    <li><a href="#rfis">RFIs</a></li>
-    <li><a href="index.html">Main Site</a></li>
-  </ul>
-  <div class="nav-end" style="margin-left: auto; display: flex; align-items: center; gap: 24px;">
-    <span style="font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--gold);">Engineering Portal</span>
-    <a href="login.html" class="btn-logout">Logout</a>
-  </div>
-  <div class="ham">
-    <span></span><span></span><span></span>
-  </div>
-</header>
-
-<div class="dash-container">
+<div class="dash-wrapper">
   
-  <!-- DASHBOARD HEADER -->
-  <div class="dash-header">
-    <div class="client-profile">
-      <img src="images/dash-engineer-avatar.webp" alt="Site Engineer" class="client-avatar" />
-      <div class="client-info">
-        <h1 id="welcomeName">Welcome Back, James</h1>
-        <p id="welcomeMeta">Chief Project Engineer — Zenith Tower Project Control</p>
-      </div>
+  <!-- LEFT SIDEBAR -->
+  <aside class="dash-sidebar">
+    <div class="sidebar-logo">
+      <a href="index.html"><img src="images/logo.webp" alt="Stackly Logo" style="height: 40px; width: auto;" /></a>
     </div>
-    <div style="text-align: right;">
-      <div style="font-size: 12px; color: var(--grey-1); text-transform: uppercase; letter-spacing: 1.5px;">BIM Coordination Level</div>
-      <div style="font-size: 15px; font-weight: 700; margin-top: 4px; color: var(--gold);">Level 3 Digital Twin Active</div>
-    </div>
-  </div>
-
-  <!-- DASHBOARD GRID -->
-  <div class="dash-grid">
     
-    <!-- LEFT COLUMN -->
-    <div style="display: flex; flex-direction: column; gap: 32px;">
-      
-      <!-- BIM DIGITAL TWIN CARD -->
-      <div class="dash-card" id="bim-twin">
-        <div class="card-title">
-          <i class="fa-solid fa-microchip"></i> BIM &amp; Digital Twin Status
-        </div>
-        <div class="project-hero">
-          <img src="images/dash-engineer-site.webp" alt="BIM Digital Model Render" />
-        </div>
-        <div class="project-details">
-          <div>
-            <h3 id="projectTitle" style="font-size: 18px; font-weight: 700; margin-bottom: 6px;">Zenith Core Digital Model</h3>
-            <p style="font-size: 13px; color: var(--grey-1); max-width: 480px;">Digital twin models are synced with on-site LiDAR scans. Level 42 column deflection metrics and structural steel load distributions are normal.</p>
-          </div>
-          <div style="text-align: right;">
-            <div style="font-size: 11px; color: var(--grey-1); text-transform: uppercase; letter-spacing: 1.5px;">Model Sync Status</div>
-            <div style="font-size: 14px; font-weight: 700; color: #2ecc71; margin-top: 6px;"><i class="fa-solid fa-circle-check"></i> Connected (0.8s Latency)</div>
-          </div>
-        </div>
+    <div class="client-profile">
+      <img src="images/dash-engineer-avatar.webp" alt="Engineer Representative" class="client-avatar" />
+      <div class="client-info">
+        <h1 id="welcomeName">James Whitmore</h1>
+        <p id="welcomeMeta">Chief Project Engineer</p>
       </div>
-
-      <!-- TELEMETRY METRICS -->
-      <div class="telemetry-grid" id="telemetry">
-        <div class="tel-box">
-          <div class="tel-label">Wind Speed</div>
-          <div class="tel-val">12.4 km/h</div>
-          <div style="font-size: 10px; color: #2ecc71; margin-top: 4px; text-transform: uppercase;">Safe for Cranes</div>
-        </div>
-        <div class="tel-box">
-          <div class="tel-label">Concrete Temperature</div>
-          <div class="tel-val">22.8 °C</div>
-          <div style="font-size: 10px; color: #2ecc71; margin-top: 4px; text-transform: uppercase;">Curing Normally</div>
-        </div>
-        <div class="tel-box">
-          <div class="tel-label">Safety Index</div>
-          <div class="tel-val ok">100%</div>
-          <div style="font-size: 10px; color: var(--gold); margin-top: 4px; text-transform: uppercase;">0 Incidents / 180 Days</div>
-        </div>
-      </div>
-
-      <!-- DAILY ENGINEER CHECKLIST -->
-      <div class="dash-card" id="operations">
-        <div class="card-title">
-          <i class="fa-solid fa-list-check"></i> Daily Engineering Operations
-        </div>
-        <div class="daily-logs">
-          <div class="log-item">
-            <input type="checkbox" checked class="log-checkbox" />
-            <div class="log-details">
-              <h4>Concrete Quality Control Approval — Floor 42 Slab</h4>
-              <p>Approved compressive strength test results from core samples poured 28 days ago. Logged to BIM database.</p>
-              <span class="log-tag">Structural Engineering</span>
-            </div>
-          </div>
-          <div class="log-item">
-            <input type="checkbox" class="log-checkbox" />
-            <div class="log-details">
-              <h4>Verify Column Alignment Scan — Core Level 48 to 51</h4>
-              <p>Review vertical plumbness coordinates from the drone LiDAR scan. Check for any deflection deviation exceeding 4mm.</p>
-              <span class="log-tag">Surveying &amp; Alignment</span>
-            </div>
-          </div>
-          <div class="log-item">
-            <input type="checkbox" class="log-checkbox" />
-            <div class="log-details">
-              <h4>MEP Piping Clearance Approval</h4>
-              <p>Authorize level 28 duct clearances after HVAC layout conflict adjustments were resolved in model file rev_B.</p>
-              <span class="log-tag">MEP Systems</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
     </div>
-
-    <!-- RIGHT COLUMN -->
-    <div style="display: flex; flex-direction: column; gap: 32px;">
+    
+    <nav class="sidebar-nav">
+      <a href="#bim-twin" class="menu-item"><i class="fa-solid fa-cubes"></i> BIM Model</a>
+      <a href="#telemetry" class="menu-item"><i class="fa-solid fa-gauge"></i> Telemetry</a>
+      <a href="#operations" class="menu-item"><i class="fa-solid fa-gears"></i> Operations</a>
+      <a href="#rfis" class="menu-item"><i class="fa-solid fa-envelope"></i> RFIs &amp; Docs</a>
       
-      <!-- SITE METRICS -->
-      <div class="dash-card" id="site-telemetry">
-        <div class="card-title">
-          <i class="fa-solid fa-helmet-safety"></i> Site Telemetry
+      <div class="sidebar-divider"></div>
+      <a href="index.html" class="menu-item"><i class="fa-solid fa-house"></i> Main Site</a>
+    </nav>
+    
+    <a href="login.html" class="btn-logout-sidebar"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
+  </aside>
+
+  <!-- MAIN AREA -->
+  <main class="dash-main">
+    
+    <!-- Mobile Top Navigation Bar -->
+    <header class="dash-top-bar">
+      <button class="sidebar-toggle"><i class="fa-solid fa-bars"></i></button>
+      <img src="images/logo.webp" alt="Stackly Logo" style="height: 32px; width: auto;" />
+      <div style="width: 24px;"></div> <!-- Spacer to center the logo -->
+    </header>
+
+    <div class="dash-content-inner">
+      <!-- DASHBOARD HEADER -->
+      <div class="dash-header">
+        <div style="display:flex; flex-direction:column;">
+          <h2 style="font-size: 20px; font-weight: 700; color: var(--gold); letter-spacing: -0.5px; margin-bottom: 4px;">Engineering Dashboard</h2>
+          <span style="font-size: 12px; color: var(--grey-1); text-transform: uppercase; letter-spacing: 1.5px;">Project Control Portal</span>
         </div>
-        <div class="docs-list">
-          <div class="doc-item" style="border-color: var(--card-border);">
-            <div class="doc-info">
-              <i class="fa-solid fa-users" style="color: var(--gold);"></i>
-              <div>
-                <div class="doc-name">Active Site Labor</div>
-                <div class="doc-meta">342 Personnel Shift 1</div>
-              </div>
-            </div>
-          </div>
-          <div class="doc-item" style="border-color: var(--card-border);">
-            <div class="doc-info">
-              <i class="fa-solid fa-truck-moving" style="color: var(--gold);"></i>
-              <div>
-                <div class="doc-name">Deliveries Scheduled</div>
-                <div class="doc-meta">4 Batches Aggregate, 2 Reinforcement Steel</div>
-              </div>
-            </div>
-          </div>
-          <div class="doc-item" style="border-color: var(--card-border);">
-            <div class="doc-info">
-              <i class="fa-solid fa-compass" style="color: var(--gold);"></i>
-              <div>
-                <div class="doc-name">Active Crane Systems</div>
-                <div class="doc-meta">4 Tower Cranes (Crane-02 limited travel due to wind)</div>
-              </div>
-            </div>
-          </div>
+        <div style="text-align: right;">
+          <div style="font-size: 11px; color: var(--grey-1); text-transform: uppercase; letter-spacing: 1.5px;">Current Site Phase</div>
+          <div style="font-size: 14px; font-weight: 700; margin-top: 4px; color: var(--gold);">Facade Installation &amp; MEP Rough-ins</div>
         </div>
       </div>
 
-      <!-- ACTIVE RFIs & SUBMITTALS -->
-      <div class="dash-card" id="rfis">
-        <div class="card-title">
-          <i class="fa-regular fa-envelope"></i> RFIs &amp; Submittals
-        </div>
-        <div class="rfi-list">
-          <div class="rfi-item">
-            <div>
-              <div class="rfi-title">RFI-142: Level 28 Slab Deflection</div>
-              <div class="rfi-meta">Issued by ME-Design · 2 hours ago</div>
+      <!-- DASHBOARD GRID -->
+      <div class="dash-grid">
+        
+        <!-- LEFT COLUMN -->
+        <div style="display: flex; flex-direction: column; gap: 32px;">
+          
+          <!-- BIM DIGITAL MODEL -->
+          <div class="dash-card" id="bim-twin">
+            <div class="card-title">
+              <i class="fa-solid fa-cubes-stacked"></i> BIM Model Live Twin
             </div>
-            <span class="rfi-status open">Open</span>
-          </div>
-          <div class="rfi-item">
-            <div>
-              <div class="rfi-title">Submittal-084: Curtain Wall Silicone Specs</div>
-              <div class="rfi-meta">Assigned to Chief Engineer · 1 day ago</div>
+            <div class="project-hero">
+              <img src="images/dash-engineer-site.webp" alt="BIM Digital Model Render" />
             </div>
-            <span class="rfi-status review">Under Review</span>
-          </div>
-          <div class="rfi-item">
-            <div>
-              <div class="rfi-title">RFI-139: Electrical Riser Relocation</div>
-              <div class="rfi-meta">Assigned to MEP lead · 2 days ago</div>
+            <div class="project-details">
+              <div>
+                <h3 id="projectTitle" style="font-size: 18px; font-weight: 700; margin-bottom: 6px;">Zenith Core Digital Model</h3>
+                <p style="font-size: 13px; color: var(--grey-1); max-width: 480px;">Digital twin models are synced with on-site LiDAR scans. Level 42 column deflection metrics and structural steel load distributions are normal.</p>
+              </div>
+              <div style="text-align: right;">
+                <div style="font-size: 11px; color: var(--grey-1); text-transform: uppercase; letter-spacing: 1.5px;">Model Sync Status</div>
+                <div style="font-size: 14px; font-weight: 700; color: #2ecc71; margin-top: 6px;"><i class="fa-solid fa-circle-check"></i> Connected (0.8s Latency)</div>
+              </div>
             </div>
-            <span class="rfi-status review">Under Review</span>
           </div>
-        </div>
-      </div>
 
+          <!-- TELEMETRY METRICS -->
+          <div class="telemetry-grid" id="telemetry">
+            <div class="tel-box">
+              <div class="tel-label">Wind Speed</div>
+              <div class="tel-val">12.4 km/h</div>
+              <div style="font-size: 10px; color: #2ecc71; margin-top: 4px; text-transform: uppercase;">Safe for Cranes</div>
+            </div>
+            <div class="tel-box">
+              <div class="tel-label">Concrete Temperature</div>
+              <div class="tel-val">22.8 °C</div>
+              <div style="font-size: 10px; color: #2ecc71; margin-top: 4px; text-transform: uppercase;">Curing Normally</div>
+            </div>
+            <div class="tel-box">
+              <div class="tel-label">Safety Index</div>
+              <div class="tel-val ok">100%</div>
+              <div style="font-size: 10px; color: var(--gold); margin-top: 4px; text-transform: uppercase;">0 Incidents / 180 Days</div>
+            </div>
+          </div>
+
+          <!-- DAILY ENGINEER CHECKLIST -->
+          <div class="dash-card" id="operations">
+            <div class="card-title">
+              <i class="fa-solid fa-list-check"></i> Daily Engineering Operations
+            </div>
+            <div class="daily-logs">
+              <div class="log-item">
+                <input type="checkbox" checked class="log-checkbox" />
+                <div class="log-details">
+                  <h4>Concrete Quality Control Approval — Floor 42 Slab</h4>
+                  <p>Approved compressive strength test results from core samples poured 28 days ago. Logged to BIM database.</p>
+                  <span class="log-tag">Structural Engineering</span>
+                </div>
+              </div>
+              <div class="log-item">
+                <input type="checkbox" class="log-checkbox" />
+                <div class="log-details">
+                  <h4>Verify Column Alignment Scan — Core Level 48 to 51</h4>
+                  <p>Review vertical plumbness coordinates from the drone LiDAR scan. Check for any deflection deviation exceeding 4mm.</p>
+                  <span class="log-tag">Surveying &amp; Alignment</span>
+                </div>
+              </div>
+              <div class="log-item">
+                <input type="checkbox" class="log-checkbox" />
+                <div class="log-details">
+                  <h4>MEP Piping Clearance Approval</h4>
+                  <p>Authorize level 28 duct clearances after HVAC layout conflict adjustments were resolved in model file rev_B.</p>
+                  <span class="log-tag">MEP Systems</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- RIGHT COLUMN -->
+        <div style="display: flex; flex-direction: column; gap: 32px;">
+          
+          <!-- SITE METRICS -->
+          <div class="dash-card" id="site-telemetry">
+            <div class="card-title">
+              <i class="fa-solid fa-helmet-safety"></i> Site Telemetry
+            </div>
+            <div class="docs-list">
+              <div class="doc-item" style="border-color: var(--card-border);">
+                <div class="doc-info">
+                  <i class="fa-solid fa-users" style="color: var(--gold);"></i>
+                  <div>
+                    <div class="doc-name">Active Site Labor</div>
+                    <div class="doc-meta">342 Personnel Shift 1</div>
+                  </div>
+                </div>
+              </div>
+              <div class="doc-item" style="border-color: var(--card-border);">
+                <div class="doc-info">
+                  <i class="fa-solid fa-truck-moving" style="color: var(--gold);"></i>
+                  <div>
+                    <div class="doc-name">Deliveries Scheduled</div>
+                    <div class="doc-meta">4 Batches Aggregate, 2 Reinforcement Steel</div>
+                  </div>
+                </div>
+              </div>
+              <div class="doc-item" style="border-color: var(--card-border);">
+                <div class="doc-info">
+                  <i class="fa-solid fa-compass" style="color: var(--gold);"></i>
+                  <div>
+                    <div class="doc-name">Active Crane Systems</div>
+                    <div class="doc-meta">4 Tower Cranes (Crane-02 limited travel due to wind)</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ACTIVE RFIs & SUBMITTALS -->
+          <div class="dash-card" id="rfis">
+            <div class="card-title">
+              <i class="fa-regular fa-envelope"></i> RFIs &amp; Submittals
+            </div>
+            <div class="rfi-list">
+              <div class="rfi-item">
+                <div>
+                  <div class="rfi-title">RFI-142: Level 28 Slab Deflection</div>
+                  <div class="rfi-meta">Issued by ME-Design AD 2 hours ago</div>
+                </div>
+                <span class="rfi-status open">Open</span>
+              </div>
+              <div class="rfi-item">
+                <div>
+                  <div class="rfi-title">Submittal-084: Curtain Wall Silicone Specs</div>
+                  <div class="rfi-meta">Assigned to Chief Engineer AD 1 day ago</div>
+                </div>
+                <span class="rfi-status review">Under Review</span>
+              </div>
+              <div class="rfi-item">
+                <div>
+                  <div class="rfi-title">RFI-139: Electrical Riser Relocation</div>
+                  <div class="rfi-meta">Assigned to MEP lead AD 2 days ago</div>
+                </div>
+                <span class="rfi-status review">Under Review</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
     </div>
-
-  </div>
-
+  </main>
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
@@ -458,8 +617,23 @@
 <script src="js/main.js"></script>
 <script>
 document.addEventListener('DOMContentLoaded', () => {
+  // Mobile toggle logic
+  const toggleBtn = document.querySelector('.sidebar-toggle');
+  const sidebar = document.querySelector('.dash-sidebar');
+  if (toggleBtn && sidebar) {
+    toggleBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      sidebar.classList.toggle('open');
+    });
+    document.addEventListener('click', (e) => {
+      if (!sidebar.contains(e.target) && e.target !== toggleBtn) {
+        sidebar.classList.remove('open');
+      }
+    });
+  }
+
   setTimeout(() => {
-    const tabs = document.querySelectorAll('.nav-links a, .mob-nav a');
+    const tabs = document.querySelectorAll('.sidebar-nav .menu-item');
     const sections = {
       'bim-twin': [document.getElementById('bim-twin')],
       'telemetry': [document.getElementById('telemetry'), document.getElementById('site-telemetry')],
@@ -510,6 +684,7 @@ document.addEventListener('DOMContentLoaded', () => {
           e.preventDefault();
           showTab(tabId);
           window.location.hash = tabId;
+          sidebar.classList.remove('open');
         });
       }
     });
@@ -522,9 +697,15 @@ document.addEventListener('DOMContentLoaded', () => {
       const welcomeMeta = document.getElementById('welcomeMeta');
       const projectTitle = document.getElementById('projectTitle');
       
-      if (welcomeName) welcomeName.textContent = `Welcome Back, ${user.name}`;
+      if (welcomeName) welcomeName.textContent = user.name;
       if (welcomeMeta) welcomeMeta.textContent = `${user.position} — ${user.project}`;
       if (projectTitle) projectTitle.textContent = `${user.project} Core Model`;
+      
+      // Update avatar if stored
+      const avatarEl = document.querySelector('.client-avatar');
+      if (avatarEl && user.role === 'customer') {
+        avatarEl.src = 'images/dash-customer-avatar.webp';
+      }
     }
 
     const initialHash = window.location.hash.substring(1);
@@ -538,4 +719,3 @@ document.addEventListener('DOMContentLoaded', () => {
 </script>
 </body>
 </html>
-

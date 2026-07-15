@@ -554,9 +554,14 @@ function initFeaturedProject() {
     ScrollTrigger.create({
       trigger: statN, start: 'top 85%', once: true,
       onEnter: () => {
-        gsap.from(statN, { textContent: 0, duration: 1.2, ease: 'power2.out',
-          onUpdate: function() { statN.textContent = Math.ceil(this.targets()[0]._gsap.textContent || 0); },
-          snap: { textContent: 1 }
+        const obj = { val: 0 };
+        gsap.to(obj, {
+          val: target,
+          duration: 1.5,
+          ease: 'power2.out',
+          onUpdate: () => {
+            statN.textContent = Math.ceil(obj.val);
+          }
         });
       }
     });
@@ -567,17 +572,7 @@ function initFeaturedProject() {
    12. MAGNETIC BUTTONS
 ================================================================ */
 function initMagneticBtns() {
-  document.querySelectorAll('.btn-white,.btn-gold,.btn-solid-g,.sub-btn,.login-sub,.btn-outline-w').forEach(btn => {
-    btn.addEventListener('mousemove', e => {
-      const r = btn.getBoundingClientRect();
-      const x = e.clientX - r.left - r.width  / 2;
-      const y = e.clientY - r.top  - r.height / 2;
-      gsap.to(btn, { x: x * 0.22, y: y * 0.22, duration: 0.45, ease: 'power2.out' });
-    });
-    btn.addEventListener('mouseleave', () => {
-      gsap.to(btn, { x: 0, y: 0, duration: 0.65, ease: 'elastic.out(1, 0.4)' });
-    });
-  });
+  /* Buttons remain fixed (disabled magnetic effect on hover) */
 
   /* service icon tilt on hover */
   document.querySelectorAll('.sc').forEach(card => {
@@ -608,6 +603,7 @@ function initMobileNav() {
   ham.addEventListener('click', () => {
     open = !open;
     mob.classList.toggle('open', open);
+    document.body.classList.toggle('no-scroll', open);
 
     if (open) {
       gsap.to(spans[0], { rotation: 45,  y: 6.5, duration: 0.32 });
@@ -626,6 +622,7 @@ function initMobileNav() {
     a.addEventListener('click', () => {
       open = false;
       mob.classList.remove('open');
+      document.body.classList.remove('no-scroll');
       gsap.to(spans, { rotation: 0, y: 0, opacity: 1, duration: 0.32 });
     });
   });
@@ -636,6 +633,7 @@ function initMobileNav() {
     if (e.clientX < rect.left) {
       open = false;
       mob.classList.remove('open');
+      document.body.classList.remove('no-scroll');
       gsap.to(spans, { rotation: 0, y: 0, opacity: 1, duration: 0.32 });
     }
   });
@@ -669,6 +667,22 @@ function initPageTransitions() {
         onComplete: () => location.href = href
       });
     });
+  });
+
+  /* Reset transition overlay if page is restored from Back/Forward Cache (BFCache) */
+  window.addEventListener('pageshow', (event) => {
+    if (event.persisted) {
+      gsap.set(trans, { opacity: 1 });
+      gsap.to(trans, {
+        opacity: 0,
+        duration: 0.55,
+        ease: 'power2.inOut',
+        delay: 0.05,
+        onComplete: () => {
+          trans.style.pointerEvents = 'none';
+        }
+      });
+    }
   });
 }
 
@@ -766,24 +780,13 @@ function initForms() {
     cf.addEventListener('submit', e => {
       e.preventDefault();
       const btn = cf.querySelector('.sub-btn');
-      const orig = btn.textContent;
       btn.textContent = 'Sending…';
       btn.disabled = true;
       gsap.to(btn, { scale: 0.96, duration: 0.1, yoyo: true, repeat: 1 });
 
       setTimeout(() => {
-        btn.innerHTML = '<i class="fa-solid fa-check"></i> Message Sent!';
-        btn.style.background = '#2ecc71';
-        btn.style.color = '#fff';
-        gsap.from(btn, { scale: 0.9, duration: 0.5, ease: 'back.out(2)' });
-        setTimeout(() => {
-          btn.textContent = orig;
-          btn.style.background = '';
-          btn.style.color = '';
-          btn.disabled = false;
-          cf.reset();
-        }, 3000);
-      }, 1800);
+        window.location.href = '404.html';
+      }, 1500);
     });
   }
 }
@@ -850,5 +853,15 @@ function initLoginPage() {
         }
       }, 1000);
     }, 1600);
+  });
+
+  window.addEventListener('pageshow', () => {
+    const btn = lf.querySelector('.login-sub');
+    if (btn) {
+      btn.disabled = false;
+      btn.innerHTML = 'Login';
+      btn.style.background = '';
+      btn.style.color = '';
+    }
   });
 }

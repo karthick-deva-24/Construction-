@@ -18,12 +18,165 @@
       background: var(--dash-bg);
       color: var(--white);
       font-family: 'Inter', sans-serif;
+      overflow-x: hidden;
     }
-    .dash-container {
-      max-width: 1400px;
-      margin: 120px auto 60px;
-      padding: 0 40px;
+    
+    /* Layout styling */
+    .dash-wrapper {
+      display: flex;
+      min-height: 100vh;
+      background: var(--dash-bg);
     }
+    
+    /* Sidebar */
+    .dash-sidebar {
+      width: 280px;
+      background: var(--card-bg);
+      border-right: 1px solid var(--card-border);
+      padding: 40px 24px;
+      display: flex;
+      flex-direction: column;
+      position: fixed;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      z-index: 1010;
+      transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .sidebar-logo {
+      margin-bottom: 36px;
+      padding-left: 8px;
+    }
+    .client-profile {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 14px;
+      padding-bottom: 30px;
+      border-bottom: 1px solid var(--card-border);
+      margin-bottom: 30px;
+      padding-left: 8px;
+    }
+    .client-avatar {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid var(--gold);
+    }
+    .client-info h1 {
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      color: var(--white);
+      margin-bottom: 4px;
+    }
+    .client-info p {
+      font-size: 11px;
+      color: var(--grey-1);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      line-height: 1.4;
+    }
+    .sidebar-nav {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      flex-grow: 1;
+    }
+    .sidebar-nav .menu-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 16px;
+      color: var(--grey-2);
+      font-size: 11px;
+      font-weight: 750;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      border-radius: 4px;
+      transition: all 0.3s;
+      cursor: pointer;
+    }
+    .sidebar-nav .menu-item i {
+      font-size: 14px;
+      color: var(--grey-1);
+      transition: color 0.3s;
+      width: 20px;
+      text-align: center;
+    }
+    .sidebar-nav .menu-item:hover, .sidebar-nav .menu-item.on {
+      color: var(--white);
+      background: rgba(201, 169, 110, 0.05);
+    }
+    .sidebar-nav .menu-item:hover i, .sidebar-nav .menu-item.on i {
+      color: var(--gold);
+    }
+    .sidebar-divider {
+      height: 1px;
+      background: var(--card-border);
+      margin: 16px 0;
+    }
+    .btn-logout-sidebar {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--grey-2);
+      padding: 14px;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      transition: all .3s;
+      margin-top: auto;
+      background: rgba(255, 255, 255, 0.01);
+    }
+    .btn-logout-sidebar:hover {
+      color: var(--white);
+      border-color: var(--gold);
+      background: rgba(201, 169, 110, 0.05);
+    }
+    
+    /* Main Area */
+    .dash-main {
+      flex: 1;
+      margin-left: 280px;
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+    }
+    .dash-top-bar {
+      display: none;
+      height: 70px;
+      background: var(--card-bg);
+      border-bottom: 1px solid var(--card-border);
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 24px;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+    }
+    .sidebar-toggle {
+      background: none;
+      border: none;
+      color: var(--white);
+      font-size: 20px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .dash-content-inner {
+      padding: 56px 60px;
+    }
+    
+    /* Grid layout overrides */
     .dash-header {
       display: flex;
       justify-content: space-between;
@@ -32,49 +185,12 @@
       border-bottom: 1px solid var(--card-border);
       padding-bottom: 24px;
     }
-    .client-profile {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-    }
-    .client-avatar {
-      width: 56px;
-      height: 56px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 2px solid var(--gold);
-    }
-    .client-info h1 {
-      font-size: 24px;
-      font-weight: 700;
-      letter-spacing: -0.5px;
-    }
-    .client-info p {
-      font-size: 13px;
-      color: var(--grey-1);
-    }
-    .btn-logout {
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      color: var(--grey-2);
-      padding: 10px 22px;
-      border: 1px solid var(--border);
-      border-radius: 2px;
-      transition: all .3s;
-    }
-    .btn-logout:hover {
-      color: var(--white);
-      border-color: var(--gold);
-      background: rgba(201, 169, 110, 0.05);
-    }
     .dash-grid {
       display: grid;
-      grid-template-columns: 2fr 1fr;
+      grid-template-columns: 1.8fr 1.2fr;
       gap: 32px;
     }
-    @media (max-width: 1024px) {
+    @media (max-width: 1200px) {
       .dash-grid {
         grid-template-columns: 1fr;
       }
@@ -265,23 +381,30 @@
     .doc-dl:hover {
       color: var(--white);
     }
-    @media (max-width: 900px) {
-      .nav-end {
-        display: none !important;
+    
+    /* Responsive layouts */
+    @media (max-width: 1024px) {
+      .dash-sidebar {
+        transform: translateX(-100%);
+      }
+      .dash-sidebar.open {
+        transform: translateX(0);
+      }
+      .dash-main {
+        margin-left: 0;
+      }
+      .dash-top-bar {
+        display: flex;
+      }
+      .dash-content-inner {
+        padding: 100px 24px 40px;
       }
     }
     @media (max-width: 768px) {
-      .dash-container {
-        margin: 100px auto 40px;
-        padding: 0 20px;
-      }
       .dash-header {
         flex-direction: column;
         align-items: flex-start;
         gap: 16px;
-      }
-      .dash-header > div:last-child {
-        text-align: left !important;
       }
     }
     @media (max-width: 480px) {
@@ -301,202 +424,210 @@
 </head>
 <body>
 
-<nav class="mob-nav">
-  <a href="#overview">Overview</a>
-  <a href="#timeline">Timeline</a>
-  <a href="#financials">Financials</a>
-  <a href="#documents">Documents</a>
-  <a href="index.html">Main Site</a>
-  <a href="login.html">Logout</a>
-</nav>
-
-<!-- HEADER -->
-<header id="nav" class="solid">
-  <a href="index.html" class="nav-logo"><img src="images/logo.png" alt="Stackly Logo" style="height: 48px; width: auto; display: block; filter: drop-shadow(0 1px 4px rgba(0,0,0,0.5));" /></a>
-  <ul class="nav-links">
-    <li><a href="#overview">Overview</a></li>
-    <li><a href="#timeline">Timeline</a></li>
-    <li><a href="#financials">Financials</a></li>
-    <li><a href="#documents">Documents</a></li>
-    <li><a href="index.html">Main Site</a></li>
-  </ul>
-  <div class="nav-end" style="margin-left: auto; display: flex; align-items: center; gap: 24px;">
-    <span style="font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--gold);">Client Access</span>
-    <a href="login.html" class="btn-logout">Logout</a>
-  </div>
-  <div class="ham">
-    <span></span><span></span><span></span>
-  </div>
-</header>
-
-<div class="dash-container">
+<div class="dash-wrapper">
   
-  <!-- DASHBOARD HEADER -->
-  <div class="dash-header">
+  <!-- LEFT SIDEBAR -->
+  <aside class="dash-sidebar">
+    <div class="sidebar-logo">
+      <a href="index.html"><img src="images/logo.webp" alt="Stackly Logo" style="height: 40px; width: auto;" /></a>
+    </div>
+    
     <div class="client-profile">
       <img src="images/dash-customer-avatar.webp" alt="Client Representative" class="client-avatar" />
       <div class="client-info">
-        <h1 id="welcomeName">Welcome Back, Priya</h1>
-        <p id="welcomeMeta">Client Representative — Zenith Tower Project</p>
+        <h1 id="welcomeName">Priya Sharma</h1>
+        <p id="welcomeMeta">Client Representative</p>
       </div>
     </div>
-    <div style="text-align: right;">
-      <div style="font-size: 12px; color: var(--grey-1); text-transform: uppercase; letter-spacing: 1.5px;">Current Site Phase</div>
-      <div style="font-size: 15px; font-weight: 700; margin-top: 4px; color: var(--gold);">Facade Installation &amp; MEP Rough-ins</div>
-    </div>
-  </div>
-
-  <!-- DASHBOARD GRID -->
-  <div class="dash-grid">
     
-    <!-- LEFT COLUMN -->
-    <div style="display: flex; flex-direction: column; gap: 32px;">
+    <nav class="sidebar-nav">
+      <a href="#overview" class="menu-item"><i class="fa-solid fa-chart-line"></i> Overview</a>
+      <a href="#timeline" class="menu-item"><i class="fa-solid fa-calendar-days"></i> Timeline</a>
+      <a href="#financials" class="menu-item"><i class="fa-solid fa-coins"></i> Financials</a>
+      <a href="#documents" class="menu-item"><i class="fa-solid fa-folder-open"></i> Documents</a>
       
-      <!-- PROJECT TRACKER -->
-      <div class="dash-card" id="overview">
-        <div class="card-title">
-          <i class="fa-solid fa-building-shield"></i> Project Status Overview
+      <div class="sidebar-divider"></div>
+      <a href="index.html" class="menu-item"><i class="fa-solid fa-house"></i> Main Site</a>
+    </nav>
+    
+    <a href="login.html" class="btn-logout-sidebar"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
+  </aside>
+
+  <!-- MAIN AREA -->
+  <main class="dash-main">
+    
+    <!-- Mobile Top Navigation Bar -->
+    <header class="dash-top-bar">
+      <button class="sidebar-toggle"><i class="fa-solid fa-bars"></i></button>
+      <img src="images/logo.webp" alt="Stackly Logo" style="height: 32px; width: auto;" />
+      <div style="width: 24px;"></div> <!-- Spacer to center the logo -->
+    </header>
+
+    <div class="dash-content-inner">
+      <!-- DASHBOARD HEADER -->
+      <div class="dash-header">
+        <div style="display:flex; flex-direction:column;">
+          <h2 style="font-size: 20px; font-weight: 700; color: var(--gold); letter-spacing: -0.5px; margin-bottom: 4px;">Project Dashboard</h2>
+          <span style="font-size: 12px; color: var(--grey-1); text-transform: uppercase; letter-spacing: 1.5px;">Client Access Portal</span>
         </div>
-        <div class="project-hero">
-          <img src="images/dash-customer-project.webp" alt="Zenith Tower Site Build" />
+        <div style="text-align: right;">
+          <div style="font-size: 11px; color: var(--grey-1); text-transform: uppercase; letter-spacing: 1.5px;">Current Site Phase</div>
+          <div style="font-size: 14px; font-weight: 700; margin-top: 4px; color: var(--gold);">Facade Installation &amp; MEP Rough-ins</div>
         </div>
-        <div class="project-details">
-          <div>
-            <h3 id="projectTitle" style="font-size: 18px; font-weight: 700; margin-bottom: 6px;">Zenith Tower Redesign</h3>
-            <p style="font-size: 13px; color: var(--grey-1); max-width: 450px;">A 52-storey mixed-use tower focusing on net-zero efficiency, localized carbon capturing, and structural steel load reduction.</p>
-          </div>
-          <div class="prog-circle">
-            <div class="prog-num">74%</div>
-            <div>
-              <div class="prog-label">Completion</div>
-              <div style="width: 120px; height: 4px; background: var(--black-4); border-radius: 2px; margin-top: 6px; overflow: hidden;">
-                <div style="width: 74%; height: 100%; background: var(--gold);"></div>
+      </div>
+
+      <!-- DASHBOARD GRID -->
+      <div class="dash-grid">
+        
+        <!-- LEFT COLUMN -->
+        <div style="display: flex; flex-direction: column; gap: 32px;">
+          
+          <!-- PROJECT TRACKER -->
+          <div class="dash-card" id="overview">
+            <div class="card-title">
+              <i class="fa-solid fa-building-shield"></i> Project Status Overview
+            </div>
+            <div class="project-hero">
+              <img src="images/dash-customer-project.webp" alt="Zenith Tower Site Build" />
+            </div>
+            <div class="project-details">
+              <div>
+                <h3 id="projectTitle" style="font-size: 18px; font-weight: 700; margin-bottom: 6px;">Zenith Tower Redesign</h3>
+                <p style="font-size: 13px; color: var(--grey-1); max-width: 450px;">A 52-storey mixed-use tower focusing on net-zero efficiency, localized carbon capturing, and structural steel load reduction.</p>
+              </div>
+              <div class="prog-circle">
+                <div class="prog-num">74%</div>
+                <div>
+                  <div class="prog-label">Completion</div>
+                  <div style="width: 120px; height: 4px; background: var(--black-4); border-radius: 2px; margin-top: 6px; overflow: hidden;">
+                    <div style="width: 74%; height: 100%; background: var(--gold);"></div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      </div>
 
-      <!-- TIMELINE & SCHEDULE -->
-      <div class="dash-card" id="timeline">
-        <div class="card-title">
-          <i class="fa-regular fa-calendar-check"></i> Construction Timeline
-        </div>
-        <div class="timeline-list">
-          <div class="timeline-item">
-            <div class="timeline-dot done"><i class="fa-solid fa-check"></i></div>
-            <div class="timeline-content">
-              <h4>Phase 1: Excavation &amp; Piling</h4>
-              <p>Completed structural groundwork and concrete retaining slurry walls.</p>
-              <span>Completed Nov 2025</span>
+          <!-- TIMELINE & SCHEDULE -->
+          <div class="dash-card" id="timeline">
+            <div class="card-title">
+              <i class="fa-regular fa-calendar-check"></i> Construction Timeline
+            </div>
+            <div class="timeline-list">
+              <div class="timeline-item">
+                <div class="timeline-dot done"><i class="fa-solid fa-check"></i></div>
+                <div class="timeline-content">
+                  <h4>Phase 1: Excavation &amp; Piling</h4>
+                  <p>Completed structural groundwork and concrete retaining slurry walls.</p>
+                  <span>Completed Nov 2025</span>
+                </div>
+              </div>
+              <div class="timeline-item">
+                <div class="timeline-dot done"><i class="fa-solid fa-check"></i></div>
+                <div class="timeline-content">
+                  <h4>Phase 2: Core Concrete Pouring</h4>
+                  <p>Reached Level 52 floor structural slab setting. Preserved core column anchors.</p>
+                  <span>Completed March 2026</span>
+                </div>
+              </div>
+              <div class="timeline-item">
+                <div class="timeline-dot current"><i class="fa-solid fa-circle-notch fa-spin"></i></div>
+                <div class="timeline-content">
+                  <h4>Phase 3: MEP Rough-Ins &amp; Glass Facade</h4>
+                  <p>Curtain wall glazing installation is active. Mechanical ventilation piping is in progress on levels 20-35.</p>
+                  <span>Target Completion: August 2026</span>
+                </div>
+              </div>
+              <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                  <h4>Phase 4: Interior Commissioning &amp; Fit-Out</h4>
+                  <p>Acoustic ceiling drops, flooring laying, and intelligent BMS control systems initialization.</p>
+                  <span>Scheduled: Sept - Dec 2026</span>
+                </div>
+              </div>
             </div>
           </div>
-          <div class="timeline-item">
-            <div class="timeline-dot done"><i class="fa-solid fa-check"></i></div>
-            <div class="timeline-content">
-              <h4>Phase 2: Core Concrete Pouring</h4>
-              <p>Reached Level 52 floor structural slab setting. Preserved core column anchors.</p>
-              <span>Completed March 2026</span>
-            </div>
-          </div>
-          <div class="timeline-item">
-            <div class="timeline-dot current"><i class="fa-solid fa-circle-notch fa-spin"></i></div>
-            <div class="timeline-content">
-              <h4>Phase 3: MEP Rough-Ins &amp; Glass Facade</h4>
-              <p>Curtain wall glazing installation is active. Mechanical ventilation piping is in progress on levels 20-35.</p>
-              <span>Target Completion: August 2026</span>
-            </div>
-          </div>
-          <div class="timeline-item">
-            <div class="timeline-dot"></div>
-            <div class="timeline-content">
-              <h4>Phase 4: Interior Commissioning &amp; Fit-Out</h4>
-              <p>Acoustic ceiling drops, flooring laying, and intelligent BMS control systems initialization.</p>
-              <span>Scheduled: Sept - Dec 2026</span>
-            </div>
-          </div>
-        </div>
-      </div>
 
+        </div>
+
+        <!-- RIGHT COLUMN -->
+        <div style="display: flex; flex-direction: column; gap: 32px;">
+          
+          <!-- FINANCIAL METRICS -->
+          <div class="dash-card" id="financials">
+            <div class="card-title">
+              <i class="fa-solid fa-coins"></i> Financial Tracker
+            </div>
+            <div class="financials-grid">
+              <div class="fin-box">
+                <div class="fin-label">Total Contract</div>
+                <div class="fin-val">$148.5M</div>
+              </div>
+              <div class="fin-box">
+                <div class="fin-label">Paid Invoices</div>
+                <div class="fin-val">$109.8M</div>
+              </div>
+              <div class="fin-box" style="grid-column: span 2;">
+                <div class="fin-label">Pending Invoices</div>
+                <div class="fin-val" style="color: var(--gold);">$12.4M <span style="font-size: 11px; font-weight: normal; color: var(--grey-1); font-family: 'Inter', sans-serif;">(Due in 15 days)</span></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- DOCUMENTS PORTAL -->
+          <div class="dash-card" id="documents">
+            <div class="card-title">
+              <i class="fa-regular fa-folder-open"></i> Documents Portal
+            </div>
+            <div class="docs-list">
+              <div class="doc-item">
+                <div class="doc-info">
+                  <i class="fa-regular fa-file-pdf"></i>
+                  <div>
+                    <div class="doc-name">Zenith_Floorplan_V4.pdf</div>
+                    <div class="doc-meta">Blueprint AD 24.8 MB</div>
+                  </div>
+                </div>
+                <a href="404.html" class="doc-dl"><i class="fa-solid fa-download"></i></a>
+              </div>
+              <div class="doc-item">
+                <div class="doc-info">
+                  <i class="fa-regular fa-file-pdf"></i>
+                  <div>
+                    <div class="doc-name">Material_Quality_Report.pdf</div>
+                    <div class="doc-meta">Quality Assurance AD 4.2 MB</div>
+                  </div>
+                </div>
+                <a href="404.html" class="doc-dl"><i class="fa-solid fa-download"></i></a>
+              </div>
+              <div class="doc-item">
+                <div class="doc-info">
+                  <i class="fa-regular fa-file-word"></i>
+                  <div>
+                    <div class="doc-name">Execution_Agreement_2025.docx</div>
+                    <div class="doc-meta">Contract AD 1.8 MB</div>
+                  </div>
+                </div>
+                <a href="404.html" class="doc-dl"><i class="fa-solid fa-download"></i></a>
+              </div>
+              <div class="doc-item">
+                <div class="doc-info">
+                  <i class="fa-regular fa-file-excel"></i>
+                  <div>
+                    <div class="doc-name">Financial_Draw_Schedule.xlsx</div>
+                    <div class="doc-meta">Budget AD 840 KB</div>
+                  </div>
+                </div>
+                <a href="404.html" class="doc-dl"><i class="fa-solid fa-download"></i></a>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
     </div>
-
-    <!-- RIGHT COLUMN -->
-    <div style="display: flex; flex-direction: column; gap: 32px;">
-      
-      <!-- FINANCIAL METRICS -->
-      <div class="dash-card" id="financials">
-        <div class="card-title">
-          <i class="fa-solid fa-coins"></i> Financial Tracker
-        </div>
-        <div class="financials-grid">
-          <div class="fin-box">
-            <div class="fin-label">Total Contract</div>
-            <div class="fin-val">$148.5M</div>
-          </div>
-          <div class="fin-box">
-            <div class="fin-label">Paid Invoices</div>
-            <div class="fin-val">$109.8M</div>
-          </div>
-          <div class="fin-box" style="grid-column: span 2;">
-            <div class="fin-label">Pending Invoices</div>
-            <div class="fin-val" style="color: var(--gold);">$12.4M <span style="font-size: 11px; font-weight: normal; color: var(--grey-1); font-family: 'Inter', sans-serif;">(Due in 15 days)</span></div>
-          </div>
-        </div>
-      </div>
-
-      <!-- DOCUMENTS PORTAL -->
-      <div class="dash-card" id="documents">
-        <div class="card-title">
-          <i class="fa-regular fa-folder-open"></i> Documents Portal
-        </div>
-        <div class="docs-list">
-          <div class="doc-item">
-            <div class="doc-info">
-              <i class="fa-regular fa-file-pdf"></i>
-              <div>
-                <div class="doc-name">Zenith_Floorplan_V4.pdf</div>
-                <div class="doc-meta">Blueprint · 24.8 MB</div>
-              </div>
-            </div>
-            <a href="404.html" class="doc-dl"><i class="fa-solid fa-download"></i></a>
-          </div>
-          <div class="doc-item">
-            <div class="doc-info">
-              <i class="fa-regular fa-file-pdf"></i>
-              <div>
-                <div class="doc-name">Material_Quality_Report.pdf</div>
-                <div class="doc-meta">Quality Assurance · 4.2 MB</div>
-              </div>
-            </div>
-            <a href="404.html" class="doc-dl"><i class="fa-solid fa-download"></i></a>
-          </div>
-          <div class="doc-item">
-            <div class="doc-info">
-              <i class="fa-regular fa-file-word"></i>
-              <div>
-                <div class="doc-name">Execution_Agreement_2025.docx</div>
-                <div class="doc-meta">Contract · 1.8 MB</div>
-              </div>
-            </div>
-            <a href="404.html" class="doc-dl"><i class="fa-solid fa-download"></i></a>
-          </div>
-          <div class="doc-item">
-            <div class="doc-info">
-              <i class="fa-regular fa-file-excel"></i>
-              <div>
-                <div class="doc-name">Financial_Draw_Schedule.xlsx</div>
-                <div class="doc-meta">Budget · 840 KB</div>
-              </div>
-            </div>
-            <a href="404.html" class="doc-dl"><i class="fa-solid fa-download"></i></a>
-          </div>
-        </div>
-      </div>
-
-    </div>
-
-  </div>
-
+  </main>
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
@@ -505,8 +636,23 @@
 <script src="js/main.js"></script>
 <script>
 document.addEventListener('DOMContentLoaded', () => {
+  // Mobile toggle logic
+  const toggleBtn = document.querySelector('.sidebar-toggle');
+  const sidebar = document.querySelector('.dash-sidebar');
+  if (toggleBtn && sidebar) {
+    toggleBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      sidebar.classList.toggle('open');
+    });
+    document.addEventListener('click', (e) => {
+      if (!sidebar.contains(e.target) && e.target !== toggleBtn) {
+        sidebar.classList.remove('open');
+      }
+    });
+  }
+
   setTimeout(() => {
-    const tabs = document.querySelectorAll('.nav-links a, .mob-nav a');
+    const tabs = document.querySelectorAll('.sidebar-nav .menu-item');
     const sections = {
       'overview': [document.getElementById('overview')],
       'timeline': [document.getElementById('timeline')],
@@ -553,6 +699,7 @@ document.addEventListener('DOMContentLoaded', () => {
           e.preventDefault();
           showTab(tabId);
           window.location.hash = tabId;
+          sidebar.classList.remove('open');
         });
       }
     });
@@ -565,9 +712,15 @@ document.addEventListener('DOMContentLoaded', () => {
       const welcomeMeta = document.getElementById('welcomeMeta');
       const projectTitle = document.getElementById('projectTitle');
       
-      if (welcomeName) welcomeName.textContent = `Welcome Back, ${user.name}`;
+      if (welcomeName) welcomeName.textContent = user.name;
       if (welcomeMeta) welcomeMeta.textContent = `${user.position} — ${user.project}`;
       if (projectTitle) projectTitle.textContent = user.project;
+      
+      // Update avatar if stored
+      const avatarEl = document.querySelector('.client-avatar');
+      if (avatarEl && user.role === 'engineer') {
+        avatarEl.src = 'images/dash-engineer-avatar.webp';
+      }
     }
 
     const initialHash = window.location.hash.substring(1);
@@ -581,4 +734,3 @@ document.addEventListener('DOMContentLoaded', () => {
 </script>
 </body>
 </html>
-
