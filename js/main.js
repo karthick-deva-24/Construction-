@@ -596,6 +596,12 @@ function initMobileNav() {
   const mob = document.querySelector('.mob-nav');
   if (!ham || !mob) return;
 
+  /* active link */
+  const page = location.pathname.split('/').pop() || 'index.html';
+  mob.querySelectorAll('a').forEach(a => {
+    if (a.getAttribute('href') === page) a.classList.add('on');
+  });
+
   const spans = ham.querySelectorAll('span');
   let open = false;
 
@@ -622,6 +628,16 @@ function initMobileNav() {
       mob.classList.remove('open');
       gsap.to(spans, { rotation: 0, y: 0, opacity: 1, duration: 0.32 });
     });
+  });
+
+  // Close menu when clicking the empty/backdrop area on the left
+  mob.addEventListener('click', (e) => {
+    const rect = mob.getBoundingClientRect();
+    if (e.clientX < rect.left) {
+      open = false;
+      mob.classList.remove('open');
+      gsap.to(spans, { rotation: 0, y: 0, opacity: 1, duration: 0.32 });
+    }
   });
 }
 

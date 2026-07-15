@@ -50,10 +50,14 @@ a{text-decoration:none;color:inherit}img{display:block;max-width:100%}ul{list-st
 
 
 /* ── MOBILE NAV ── */
-.mob-nav{position:fixed;inset:0;z-index:1005;background:var(--black);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:32px;transform:translateX(100%);transition:transform .55s cubic-bezier(.76,0,.24,1)}
+.mob-nav{position:fixed;top:0;right:0;bottom:0;width:75vw;max-width:320px;height:100vh;z-index:1005;background:var(--black-2);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:36px;transform:translateX(100%);transition:transform .55s cubic-bezier(.76,0,.24,1);box-shadow:-10px 0 30px rgba(0,0,0,0.5)}
 .mob-nav.open{transform:translateX(0)}
-.mob-nav a{font-family:'Bebas Neue',sans-serif;font-size:52px;letter-spacing:4px;color:var(--white);transition:color .3s}
-.mob-nav a:hover{color:var(--gold)}
+.mob-nav::before{content:'';position:absolute;top:0;right:0;width:100vw;height:100vh;background:rgba(0,0,0,0.65);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);z-index:-1;opacity:0;pointer-events:none;transition:opacity .55s ease}
+.mob-nav.open::before{opacity:1;pointer-events:all}
+.mob-nav a{font-family:'Inter',sans-serif;font-size:18px;font-weight:500;letter-spacing:2.5px;text-transform:uppercase;color:var(--grey-2);position:relative;transition:color .3s;padding-bottom:10px}
+.mob-nav a:hover,.mob-nav a.on{color:var(--white)}
+.mob-nav a::after{content:'';position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:0;height:1px;background:var(--gold);transition:width .35s var(--ease)}
+.mob-nav a.on::after,.mob-nav a:hover::after{width:100px}
 
 /* ── NAV ── */
 #nav{position:fixed;top:0;left:0;right:0;z-index:1000;height:var(--nav-h);display:flex;align-items:center;padding:0 56px;background:rgba(11,11,11,0.25);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);transition:background .4s var(--ease),box-shadow .4s var(--ease)}
@@ -61,12 +65,12 @@ a{text-decoration:none;color:inherit}img{display:block;max-width:100%}ul{list-st
 .nav-logo{font-family:'Bebas Neue',sans-serif;font-size:30px;letter-spacing:5px;color:var(--white);flex-shrink:0;text-shadow:0 1px 4px rgba(0,0,0,0.5)}
 .nav-logo em{color:var(--gold);font-style:normal}
 .nav-links{display:flex;gap:40px;margin:0 auto}
-.nav-links a{font-size:11px;font-weight:600;letter-spacing:2.5px;text-transform:uppercase;color:var(--grey-2);position:relative;transition:color .3s;text-shadow:0 1px 4px rgba(0,0,0,0.5)}
+.nav-links a{font-size:14px;font-weight:600;letter-spacing:2.5px;text-transform:uppercase;color:var(--grey-2);position:relative;transition:color .3s;text-shadow:0 1px 4px rgba(0,0,0,0.5)}
 .nav-links a::after{content:'';position:absolute;bottom:-3px;left:0;width:0;height:1px;background:var(--gold);transition:width .35s var(--ease)}
 .nav-links a:hover,.nav-links a.on{color:var(--white)}
 .nav-links a:hover::after,.nav-links a.on::after{width:100%}
 .nav-end{display:flex;align-items:center;gap:16px;flex-shrink:0}
-.btn-login{font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--grey-2);padding:10px 22px;border:1px solid var(--border);border-radius:2px;transition:all .3s;text-shadow:0 1px 4px rgba(0,0,0,0.5)}
+.btn-login{font-size:14px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--grey-2);padding:10px 22px;border:1px solid var(--border);border-radius:2px;transition:all .3s;text-shadow:0 1px 4px rgba(0,0,0,0.5)}
 .btn-login:hover{color:var(--white);border-color:rgba(255,255,255,.25)}
 .ham{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;z-index:1006}
 .ham span{display:block;width:24px;height:1.5px;background:var(--white);border-radius:2px;transition:all .3s}
@@ -82,7 +86,7 @@ a{text-decoration:none;color:inherit}img{display:block;max-width:100%}ul{list-st
 .hero-top{position:absolute;top:calc(var(--nav-h) + 28px);left:56px;right:56px;display:flex;justify-content:space-between;align-items:flex-start;z-index:3}
 .hero-est{font-size:11px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.7);opacity:0;transform:translateY(-10px)}
 .hero-est em{color:var(--gold);font-style:normal}
-.hero-tagline{max-width:320px;font-size:13px;line-height:1.75;color:rgba(255,255,255,.55);text-align:right;opacity:0;transform:translateY(-10px)}
+.hero-tagline{max-width:380px;font-size:16px;line-height:1.75;color:rgba(255,255,255,.55);text-align:right;opacity:0;transform:translateY(-10px)}
 .hero-body{position:relative;z-index:3;padding:0 48px 72px}
 .hero-h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(68px,10.5vw,148px);line-height:.9;letter-spacing:1px;color:var(--white);overflow:hidden}
 .hero-h1 .row{display:block;overflow:hidden}
@@ -245,16 +249,16 @@ a{text-decoration:none;color:inherit}img{display:block;max-width:100%}ul{list-st
 footer{background:#060606;border-top:1px solid var(--border);padding:72px 0 36px}
 .foot-grid{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:56px;padding-bottom:56px;border-bottom:1px solid var(--border)}
 .foot-brand .nav-logo{font-size:30px;display:block;margin-bottom:18px}
-.foot-brand p{font-size:13px;line-height:1.85;color:var(--grey-1);max-width:260px;margin-bottom:24px}
+.foot-brand p{font-size:14px;line-height:1.85;color:var(--grey-1);max-width:260px;margin-bottom:24px}
 .socials{display:flex;gap:10px}
 .soc-btn{width:38px;height:38px;border:1px solid var(--border);border-radius:2px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;transition:all .3s}
 .soc-btn:hover{border-color:var(--gold);color:var(--gold)}
-.foot-col h4{font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--white);margin-bottom:22px}
+.foot-col h4{font-family:'Bebas Neue',sans-serif;font-size:20px;font-weight:400;letter-spacing:1.5px;text-transform:uppercase;color:var(--white);margin-bottom:22px}
 .foot-col ul{display:flex;flex-direction:column;gap:12px}
-.foot-col ul a{font-size:13px;color:var(--grey-1);transition:color .3s}
+.foot-col ul a{font-size:14px;color:var(--grey-1);transition:color .3s}
 .foot-col ul a:hover{color:var(--gold)}
 .foot-bottom{padding-top:28px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
-.foot-copy{font-size:11px;color:var(--grey-1);letter-spacing:.5px}
+.foot-copy{font-size:12px;color:var(--grey-1);letter-spacing:.5px}
 .foot-copy em{color:var(--gold);font-style:normal}
 
 /* ══════════════════════════════
