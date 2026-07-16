@@ -437,6 +437,7 @@
       <div class="client-info">
         <h1 id="welcomeName">Priya Sharma</h1>
         <p id="welcomeMeta">Client Representative</p>
+        <p id="welcomeEmail" style="font-size: 11px; color: var(--grey-1); text-transform: none; letter-spacing: 0.5px; margin-top: 2px; word-break: break-all;">priya@company.com</p>
       </div>
     </div>
     
@@ -710,10 +711,12 @@ document.addEventListener('DOMContentLoaded', () => {
       const user = JSON.parse(sessionUser);
       const welcomeName = document.getElementById('welcomeName');
       const welcomeMeta = document.getElementById('welcomeMeta');
+      const welcomeEmail = document.getElementById('welcomeEmail');
       const projectTitle = document.getElementById('projectTitle');
       
       if (welcomeName) welcomeName.textContent = user.name;
       if (welcomeMeta) welcomeMeta.textContent = `${user.position} — ${user.project}`;
+      if (welcomeEmail && user.email) welcomeEmail.textContent = user.email;
       if (projectTitle) projectTitle.textContent = user.project;
       
       // Update avatar if stored

@@ -591,6 +591,13 @@ function initMobileNav() {
   const mob = document.querySelector('.mob-nav');
   if (!ham || !mob) return;
 
+  // Dynamically create close button
+  const closeBtn = document.createElement('button');
+  closeBtn.className = 'mob-close';
+  closeBtn.innerHTML = '<i class="fa-solid fa-xmark"></i>';
+  closeBtn.setAttribute('aria-label', 'Close Menu');
+  mob.insertBefore(closeBtn, mob.firstChild);
+
   /* active link */
   const page = location.pathname.split('/').pop() || 'index.html';
   mob.querySelectorAll('a').forEach(a => {
@@ -599,6 +606,13 @@ function initMobileNav() {
 
   const spans = ham.querySelectorAll('span');
   let open = false;
+
+  closeBtn.addEventListener('click', () => {
+    open = false;
+    mob.classList.remove('open');
+    document.body.classList.remove('no-scroll');
+    gsap.to(spans, { rotation: 0, y: 0, opacity: 1, duration: 0.32 });
+  });
 
   ham.addEventListener('click', () => {
     open = !open;
